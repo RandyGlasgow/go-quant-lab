@@ -33,5 +33,11 @@ func main() {
 
 	fmt.Println("Hello World")
 
-	http.ListenAndServe(":"+os.Getenv("PORT"), router)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	fmt.Println("Listening on port", port)
+	http.ListenAndServe(":"+port, router)
 }
