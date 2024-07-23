@@ -76,6 +76,5 @@ func MS_GetSymbolsEndOfDayByDate(r *http.Request) (*http.Response, error) {
 	q.Add("symbols", symbols)
 	url.RawQuery = q.Encode()
 
-	log.Println(url.String())
 	return http.Get(url.String())
 }

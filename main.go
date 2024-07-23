@@ -20,7 +20,7 @@ func main() {
 	router.Use(middleware.Logger)
 	router.Use(middleware.Recoverer)
 
-	err := godotenv.Load()
+	err := godotenv.Load(".env")
 	if err != nil {
 		fmt.Println("Error loading .env file")
 	}
@@ -30,6 +30,7 @@ func main() {
 	})
 
 	controller.EndOfDayRoutes(router)
+	controller.AuthenticationRoutes(router)
 
 	fmt.Println("Hello World")
 

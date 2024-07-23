@@ -20,7 +20,7 @@ func EndOfDayRoutes(r chi.Router) {
 			}
 
 			var json = ms_service.EndOfDayService{}
-			err = http_utils.ExtractJsonFromBody(resp, &json)
+			err = http_utils.ExtractJsonFromResponseBody(resp, &json)
 			if err != nil {
 				http_utils.HttpCustomError(w, err)
 				return
@@ -36,7 +36,7 @@ func EndOfDayRoutes(r chi.Router) {
 			}
 
 			var json = ms_service.EndOfDayService{}
-			err = http_utils.ExtractJsonFromBody(resp, &json)
+			err = http_utils.ExtractJsonFromResponseBody(resp, &json)
 			if err != nil {
 				http_utils.HttpCustomError(w, err)
 				return
