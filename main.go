@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/vec-search/lib"
 	"github.com/vec-search/lib/redis"
 	"net/http"
 	"os"
@@ -21,6 +22,7 @@ func main() {
 	}
 
 	redis.InitRedis()
+	lib.IntiPolygon()
 	router := chi.NewRouter()
 	// A good base middleware stack
 	router.Use(middleware.RequestID)
