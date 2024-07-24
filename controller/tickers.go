@@ -68,6 +68,7 @@ func TickerRoutes(r chi.Router) {
 			}
 
 			render.JSON(w, r, jsonData)
+			return
 		})
 	})
 }

@@ -44,6 +44,7 @@ func EndOfDayRoutes(r chi.Router) {
 					return
 				}
 				render.JSON(w, r, jsonData)
+				return
 			}
 
 			resp, err := ms_service.MS_GetSymbolsEndOfDayByDate(r)
@@ -68,6 +69,7 @@ func EndOfDayRoutes(r chi.Router) {
 			err = rclient.Set(r.Context(), symbols, binaryJson, 0).Err()
 
 			render.JSON(w, r, jsonData)
+			return
 		})
 
 		r.Get("/latest", func(w http.ResponseWriter, r *http.Request) {
@@ -98,6 +100,7 @@ func EndOfDayRoutes(r chi.Router) {
 					return
 				}
 				render.JSON(w, r, jsonData)
+				return
 			}
 
 			resp, err := ms_service.MS_GetSymbolsEndOfDayLatest(r)
@@ -127,6 +130,7 @@ func EndOfDayRoutes(r chi.Router) {
 			err = rclient.Set(r.Context(), symbols, binaryJson, tomorrow6am.Sub(time.Now())).Err()
 
 			render.JSON(w, r, jsonData)
+			return
 		})
 	})
 }
