@@ -127,3 +127,21 @@ func ExtractOptionalExchangeFromQuery(r *http.Request) (string, error) {
 
 	return exchange, nil
 }
+
+func ExtractSingleSymbolFromQuery(r *http.Request) (string, error) {
+	q := r.URL.Query()
+
+	symbol := q.Get("symbol")
+
+	// if symbol is empty return an error
+	if symbol == "" {
+		return "", errors.New("symbol query parameter is required")
+	}
+
+	if len(strings.Split(symbol, ",")) > 1 {
+		return "", errors.New("symbol query parameter must be a single symbol")
+	}
+
+	// return the uppercase symbol
+	return strings.ToUpper(symbol), nil
+}

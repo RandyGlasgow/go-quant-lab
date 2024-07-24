@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"github.com/vec-search/lib/market_stack"
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
@@ -19,7 +20,7 @@ func EndOfDayRoutes(r chi.Router) {
 				http_utils.HttpCustomError(w, err)
 			}
 
-			var json = ms_service.EndOfDayService{}
+			var json = market_stack.EndOfDayService{}
 			err = http_utils.ExtractJsonFromResponseBody(resp, &json)
 			if err != nil {
 				http_utils.HttpCustomError(w, err)
@@ -35,7 +36,7 @@ func EndOfDayRoutes(r chi.Router) {
 				http_utils.HttpCustomError(w, err)
 			}
 
-			var json = ms_service.EndOfDayService{}
+			var json = market_stack.EndOfDayService{}
 			err = http_utils.ExtractJsonFromResponseBody(resp, &json)
 			if err != nil {
 				http_utils.HttpCustomError(w, err)

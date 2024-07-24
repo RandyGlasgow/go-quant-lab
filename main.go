@@ -42,6 +42,7 @@ func main() {
 
 	controller.EndOfDayRoutes(router)
 	controller.AuthenticationRoutes(router)
+	controller.TickerRoutes(router)
 
 	fmt.Println("Hello World")
 
