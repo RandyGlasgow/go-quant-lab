@@ -18,8 +18,6 @@ func createAuthClient() *authorizer.AuthorizerClient {
 	authorizerUrl := os.Getenv("AUTHORIZER_URL")
 	redirectUrl := ""
 
-	log.Println("AUTHORIZER_CLIENT_ID: ", clientId)
-
 	authorizerClient, err := authorizer.NewAuthorizerClient(clientId, authorizerUrl, redirectUrl, defaultHeaders)
 	if err != nil {
 		log.Fatal(err)

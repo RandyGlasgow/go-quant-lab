@@ -15,7 +15,7 @@ type RedisRepository struct {
 var Redis RedisRepository
 
 func InitRedis() {
-	godotenv.Load(".env")
+	godotenv.Load()
 
 	opt, err := redis.ParseURL(os.Getenv("REDIS_URL"))
 
