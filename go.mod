@@ -11,5 +11,6 @@ require (
 
 require (
 	github.com/ajg/form v1.5.1 // indirect
+	github.com/go-chi/cors v1.2.1 // indirect
 	github.com/oliread/marketstack v0.1.0 // indirect
 )
