@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/vec-search/lib/redis"
 	"net/http"
 	"os"
 
@@ -14,6 +15,12 @@ import (
 )
 
 func main() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Println("Error loading .env file")
+	}
+
+	redis.InitRedis()
 	router := chi.NewRouter()
 	// A good base middleware stack
 	router.Use(middleware.RequestID)
@@ -30,11 +37,6 @@ func main() {
 		AllowCredentials: false,
 		MaxAge:           300, // Maximum value not ignored by any of major browsers
 	}))
-
-	err := godotenv.Load(".env")
-	if err != nil {
-		fmt.Println("Error loading .env file")
-	}
 
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		render.JSON(w, r, map[string]interface{}{"hello": "world"})

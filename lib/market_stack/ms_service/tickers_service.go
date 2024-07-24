@@ -14,9 +14,5 @@ func MS_GetSymbolInfo(r *http.Request) (*http.Response, error) {
 	fmt.Println("symbol:", symbol)
 	url.Path += "tickers/" + strings.ToUpper(symbol)
 
-	// add the symbols query parameter
-
-	fmt.Println("url:", url.String())
-
 	return http.Get(url.String())
 }
