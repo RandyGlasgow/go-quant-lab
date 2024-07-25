@@ -1,8 +1,9 @@
 package lib
 
 import (
-	polygon "github.com/polygon-io/client-go/rest"
 	"os"
+
+	polygon "github.com/polygon-io/client-go/rest"
 )
 
 type PolyIo struct {
@@ -11,9 +12,12 @@ type PolyIo struct {
 
 var PolyIoClient PolyIo
 
+var PolygonClient polygon.Client
+
 func IntiPolygon() {
 	polygonApiKey := os.Getenv("POLYGON_API_KEY")
 	client := polygon.New(polygonApiKey)
 
 	PolyIoClient = PolyIo{Client: *client}
+	PolygonClient = *client
 }

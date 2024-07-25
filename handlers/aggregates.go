@@ -2,18 +2,19 @@ package handlers
 
 import (
 	"errors"
+	"math"
+	"net/http"
+	"time"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/render"
 	"github.com/polygon-io/client-go/rest/iter"
 	"github.com/polygon-io/client-go/rest/models"
 	"github.com/vec-search/lib"
 	"github.com/vec-search/lib/http/http_utils"
-	"math"
-	"net/http"
-	"time"
 )
 
-func getSymbolAggs(params *models.ListAggsParams, r *http.Request) *iter.Iter[models.Agg] {
+func GetSymbolAggs(params *models.ListAggsParams, r *http.Request) *iter.Iter[models.Agg] {
 	c := lib.PolyIoClient.Client
 	res := c.ListAggs(r.Context(), &models.ListAggsParams{
 		Ticker:     params.Ticker,
@@ -35,7 +36,7 @@ func FiftyTwoWeekHighLow(w http.ResponseWriter, r *http.Request) {
 
 	today := time.Now()
 
-	res := getSymbolAggs(&models.ListAggsParams{
+	res := GetSymbolAggs(&models.ListAggsParams{
 		Ticker:     ticker,
 		Multiplier: 1,
 		Timespan:   "week",

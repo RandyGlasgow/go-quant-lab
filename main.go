@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/vec-search/lib"
-	"github.com/vec-search/lib/redis"
 	"net/http"
 	"os"
+
+	"github.com/vec-search/lib"
+	"github.com/vec-search/lib/redis"
+	"github.com/vec-search/routes"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -45,9 +47,9 @@ func main() {
 	})
 
 	controller.EndOfDayRoutes(router)
-	controller.AuthenticationRoutes(router)
 	controller.TickerRoutes(router)
 	controller.SymbolInfoRoutes(router)
+	routes.GatewayRoutes(router)
 
 	fmt.Println("Hello World")
 
