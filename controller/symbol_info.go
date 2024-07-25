@@ -8,5 +8,6 @@ import (
 func SymbolInfoRoutes(r chi.Router) {
 	r.Route("/symbol_info", func(r chi.Router) {
 		r.Get("/{date}", handlers.SymbolInfo)
+		r.Get("/52_week_high_low/{symbol}", handlers.FiftyTwoWeekHighLow)
 	})
 }

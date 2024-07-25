@@ -14,5 +14,6 @@ var PolyIoClient PolyIo
 func IntiPolygon() {
 	polygonApiKey := os.Getenv("POLYGON_API_KEY")
 	client := polygon.New(polygonApiKey)
+
 	PolyIoClient = PolyIo{Client: *client}
 }
