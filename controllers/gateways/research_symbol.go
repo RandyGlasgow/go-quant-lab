@@ -169,6 +169,7 @@ func ResearchSymbolSnapshot(w http.ResponseWriter, r *http.Request) {
 	fmt.Print(err)
 	if err != nil {
 		http_utils.HttpStandardError(w, http.StatusBadRequest)
+		return
 	}
 
 	// Get the ticker details
