@@ -3,7 +3,6 @@ package gateways
 import (
 	"context"
 	"errors"
-	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -58,7 +57,16 @@ func ResearchSymbolTimeSeries(w http.ResponseWriter, r *http.Request) {
 	var dateFrom, dateTo models.Millis
 	dateTo = models.Millis(time.Now())
 	var measure models.Timespan
+
 	switch measureQuery {
+	case "minute":
+		dateFrom = models.Millis(time.Now().Add(-1 * time.Minute * time.Duration(delta)))
+		measure = models.Minute
+
+	case "hour":
+		dateFrom = models.Millis(time.Now().Add(-1 * time.Hour * time.Duration(delta)))
+		measure = models.Hour
+
 	case "day":
 		dateFrom = models.Millis(time.Now().AddDate(0, 0, -1*delta))
 		measure = models.Day
@@ -90,7 +98,6 @@ func ResearchSymbolTimeSeries(w http.ResponseWriter, r *http.Request) {
 		To:         dateTo,
 	})
 
-	fmt.Println(res)
 	results := []models.Agg{}
 
 	for {
