@@ -10,5 +10,6 @@ func GatewayRoutes(r chi.Router) {
 		r.Get("/{symbol}", gateways.ResearchSymbol)
 		r.Get("/{symbol}/time_series", gateways.ResearchSymbolTimeSeries)
 		r.Get("/{symbol}/news", gateways.ResearchSymbolNews)
+		r.Get(("/snapshot"), gateways.ResearchSymbolSnapshot)
 	})
 }

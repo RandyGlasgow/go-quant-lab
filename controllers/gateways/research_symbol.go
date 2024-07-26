@@ -3,8 +3,10 @@ package gateways
 import (
 	"context"
 	"errors"
+	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/go-chi/chi/v5"
@@ -143,4 +145,32 @@ func ResearchSymbolNews(w http.ResponseWriter, r *http.Request) {
 
 	render.JSON(w, r, results)
 
+}
+
+func ResearchSymbolSnapshot(w http.ResponseWriter, r *http.Request) {
+	symbols := r.URL.Query().Get("symbols")
+
+	if symbols == "" {
+		http_utils.HttpCustomError(w, errors.New("symbols is required"))
+		return
+	}
+
+	// uppercase the symbols
+	symbols = strings.ToUpper(symbols)
+
+	client := lib.PolygonClient
+	params := models.GetAllTickersSnapshotParams{
+		Tickers:    &symbols,
+		MarketType: models.Stocks,
+		Locale:     models.US,
+	}
+
+	data, err := client.GetAllTickersSnapshot(r.Context(), &params)
+	fmt.Print(err)
+	if err != nil {
+		http_utils.HttpStandardError(w, http.StatusBadRequest)
+	}
+
+	// Get the ticker details
+	render.JSON(w, r, data)
 }
