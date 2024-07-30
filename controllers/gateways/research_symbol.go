@@ -220,3 +220,20 @@ func ResearchSymbolFiftyTwoWeek(w http.ResponseWriter, r *http.Request) {
 
 	render.JSON(w, r, data)
 }
+
+func ResearchSymbolRelatedCompanies(w http.ResponseWriter, r *http.Request) {
+	symbol := chi.URLParam(r, "symbol")
+
+	client := lib.PolygonClient
+	params := models.GetTickerRelatedCompaniesParams{
+		Ticker: symbol,
+	}
+
+	data, err := client.GetTickerRelatedCompanies(r.Context(), &params)
+	if err != nil {
+		http_utils.HttpStandardError(w, http.StatusBadRequest)
+	}
+
+	// Get the ticker details
+	render.JSON(w, r, data)
+}

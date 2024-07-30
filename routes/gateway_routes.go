@@ -6,11 +6,13 @@ import (
 )
 
 func GatewayRoutes(r chi.Router) {
+
 	r.Route("/gateway", func(r chi.Router) {
 		r.Get("/{symbol}", gateways.ResearchSymbol)
 		r.Get("/{symbol}/time_series", gateways.ResearchSymbolTimeSeries)
 		r.Get("/{symbol}/news", gateways.ResearchSymbolNews)
 		r.Get("/{symbol}/fifty_two", gateways.ResearchSymbolFiftyTwoWeek)
+		r.Get("/{symbol}/financials", gateways.ResearchSymbolSnapshot)
 		r.Get(("/snapshot"), gateways.ResearchSymbolSnapshot)
 	})
 }
